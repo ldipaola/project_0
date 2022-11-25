@@ -5,6 +5,26 @@ const User = require('../models/user')
  * /api/users/
  * GET All Users
  */
+
+exports.listUser = async (req, res) => {
+  let { limit = 10, page = 1, category, q } = req.query
+
+  const limitRecords = parseInt(limit)
+  const skip = (page - 1) * limit
+
+  let query = {}
+  if (q) {
+    query = { $text: { $search: q } }
+  }
+  if (category) query.category = category
+
+  try {
+    const movies = await Movie.find(query).limit(limitRecords).skip(skip)
+    res.json({ page: page, limit: limitRecords, movies })
+  } catch (err) {
+    res.status(400).json({ message: err })
+  }
+}
 exports.listUsers = async (req, res) => {
   let { limit = 10, page = 1, category, q } = req.query
 

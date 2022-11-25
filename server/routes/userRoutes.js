@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const movieController = require('../controllers/userController')
+const userController = require('../controllers/userController')
 
 /*
  * APP Routes
  */
-router.get('/api/user/', movieController.listMovies)
-router.get('/api/users/', movieController.listMovies)
-router.post('/api/user/', movieController.insertSingleMovie)
-router.patch('/api/user/:id', movieController.updateSingleMovie)
-router.delete('/api/user/:id', movieController.deleteSingleMovie)
+router.get('/api/user/', userController.listUser)
+router.get('/api/users/', userController.listUsers)
+router.post('/api/user/', userController.insertSingleUser)
+router.patch('/api/user/:id', userController.updateSingleUser)
+router.delete('/api/user/:id', userController.deleteSingleUser)
 
 module.exports = router
